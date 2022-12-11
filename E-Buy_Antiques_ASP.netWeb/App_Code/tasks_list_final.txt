@@ -1,0 +1,32 @@
+
+
+Tasks
+Admin :
+Item crud( done with some error in image)
+Category crud.
+Manage orders(customer info and order status(pending,complete))
+Manage Customers(customer info and order status(pending,complete))
+Reports Generation.
+Manage feedback 
+Manage query
+User:
+Heading Home  -show all products from db ->
+Category -Category wise products. 
+My cart
+My orders
+cart:product desc->buy now or add to cart->continue shopping or buy now->place order-register-> payment->bill invoice
+About us Contact us. 
+
+My Tasks:
+documentation with data dictionary and class diagrams
+Shopping cart flow(full)(user side),payment,Manage order in user and admin panel,Manage customer(admin), item reports
+admin side(item crud)
+
+Drashti:
+Activity diagrams
+Login ,sign up ,category crud(admin),bill invoice code,feedback section in product desc.
+Manage feedback(view and remove operations)(admin)
+Tapan :
+Sequence diagrams
+design all pages,about us ,contact us,email to customer for order placed,search product,Customer Query form 
+Manage query(view and remove operations)(admin)

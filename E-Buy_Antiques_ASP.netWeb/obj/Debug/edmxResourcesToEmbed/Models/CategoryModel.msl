@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ebuyAntiquesStoreModelStoreContainer" CdmEntityContainer="ebuyAntiquesStoreEntities">
+    <EntitySetMapping Name="CategoryMasters">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.CategoryMaster">
+        <MappingFragment StoreEntitySet="CategoryMaster">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+          <ScalarProperty Name="categoryDescription" ColumnName="categoryDescription" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+          <ScalarProperty Name="addedDate" ColumnName="addedDate" />
+          <ScalarProperty Name="categoryImage" ColumnName="categoryImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemDiscounts">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.ItemDiscount">
+        <MappingFragment StoreEntitySet="ItemDiscount">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="startDatetimeStamp" ColumnName="startDatetimeStamp" />
+          <ScalarProperty Name="endDatetimeStamp" ColumnName="endDatetimeStamp" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="discountID" ColumnName="discountID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemMasters">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.ItemMaster">
+        <MappingFragment StoreEntitySet="ItemMaster">
+          <ScalarProperty Name="itemPrice" ColumnName="itemPrice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="itemId" ColumnName="itemId" />
+          <ScalarProperty Name="itemName" ColumnName="itemName" />
+          <ScalarProperty Name="itemDescription" ColumnName="itemDescription" />
+          <ScalarProperty Name="itemWeight" ColumnName="itemWeight" />
+          <ScalarProperty Name="itemAge" ColumnName="itemAge" />
+          <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+          <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+          <ScalarProperty Name="addedDate" ColumnName="addedDate" />
+          <ScalarProperty Name="currencyCode" ColumnName="currencyCode" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="itemImage" ColumnName="itemImage" />
+          <ScalarProperty Name="boughtFromCustomer" ColumnName="boughtFromCustomer" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+          <ScalarProperty Name="customerID" ColumnName="customerID" />
+          <ScalarProperty Name="orderNumber" ColumnName="orderNumber" />
+          <ScalarProperty Name="paymentType" ColumnName="paymentType" />
+          <ScalarProperty Name="tax" ColumnName="tax" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="shippingAddress" ColumnName="shippingAddress" />
+          <ScalarProperty Name="orderDateTime" ColumnName="orderDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="orderDetailsID" ColumnName="orderDetailsID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderPayments">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.OrderPayment">
+        <MappingFragment StoreEntitySet="OrderPayment">
+          <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+          <ScalarProperty Name="paymentType" ColumnName="paymentType" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="ebuyAntiquesStoreModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userRegistered" ColumnName="userRegistered" />
+          <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="userAddress" ColumnName="userAddress" />
+          <ScalarProperty Name="orderedTimes" ColumnName="orderedTimes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ebuyAntiquesStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CategoryMaster">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categoryName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="categoryDescription" Type="text" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedOn" Type="date" />
+    <Property Name="addedDate" Type="date" Nullable="false" />
+    <Property Name="categoryImage" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ItemDiscount">
+    <Key>
+      <PropertyRef Name="discountID" />
+    </Key>
+    <Property Name="itemID" Type="int" Nullable="false" />
+    <Property Name="startDatetimeStamp" Type="date" Nullable="false" />
+    <Property Name="endDatetimeStamp" Type="date" Nullable="false" />
+    <Property Name="discount" Type="float" Nullable="false" />
+    <Property Name="discountID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItemMaster">
+    <Key>
+      <PropertyRef Name="itemId" />
+    </Key>
+    <Property Name="itemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="itemName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="itemDescription" Type="text" />
+    <Property Name="itemWeight" Type="real" Nullable="false" />
+    <Property Name="itemAge" Type="int" Nullable="false" />
+    <Property Name="updatedBy" Type="int" />
+    <Property Name="updatedOn" Type="date" />
+    <Property Name="addedDate" Type="date" Nullable="false" />
+    <Property Name="currencyCode" Type="varchar" MaxLength="3" />
+    <Property Name="categoryId" Type="int" Nullable="false" />
+    <Property Name="itemImage" Type="varchar(max)" />
+    <Property Name="boughtFromCustomer" Type="tinyint" />
+    <Property Name="customerID" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="itemPrice" Type="real" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="int" Nullable="false" />
+    <Property Name="customerID" Type="int" Nullable="false" />
+    <Property Name="orderNumber" Type="int" Nullable="false" />
+    <Property Name="paymentType" Type="int" Nullable="false" />
+    <Property Name="tax" Type="float" Nullable="false" />
+    <Property Name="totalPrice" Type="float" Nullable="false" />
+    <Property Name="subtotal" Type="float" Nullable="false" />
+    <Property Name="shippingAddress" Type="text" Nullable="false" />
+    <Property Name="orderDateTime" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderDetails">
+    <Key>
+      <PropertyRef Name="orderDetailsID" />
+    </Key>
+    <Property Name="itemID" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="orderDetailsID" Type="int" Nullable="false" />
+    <Property Name="orderID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderPayment">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="int" Nullable="false" />
+    <Property Name="paymentType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="orderID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="userRegistered" Type="datetime" Nullable="false" />
+    <Property Name="isAdmin" Type="tinyint" Nullable="false" />
+    <Property Name="userEmail" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="userPassword" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="userAddress" Type="text" Nullable="false" />
+    <Property Name="orderedTimes" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CategoryM__updat__4F7CD00D">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="CategoryMaster" Type="Self.CategoryMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="CategoryMaster">
+        <PropertyRef Name="updatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemMaste__categ__6E01572D">
+    <End Role="CategoryMaster" Type="Self.CategoryMaster" Multiplicity="1" />
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategoryMaster">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="ItemMaster">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemMaste__updat__5AEE82B9">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="0..1" />
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="ItemMaster">
+        <PropertyRef Name="updatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ItemPrici__itemI__5DCAEF64">
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+    <End Role="ItemDiscount" Type="Self.ItemDiscount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemMaster">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="ItemDiscount">
+        <PropertyRef Name="itemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemDiscount_ItemDiscount">
+    <End Role="ItemDiscount" Type="Self.ItemDiscount" Multiplicity="1" />
+    <End Role="ItemDiscount1" Type="Self.ItemDiscount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ItemDiscount">
+        <PropertyRef Name="discountID" />
+      </Principal>
+      <Dependent Role="ItemDiscount1">
+        <PropertyRef Name="discountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemDiscount_ItemDiscount1">
+    <End Role="ItemDiscount" Type="Self.ItemDiscount" Multiplicity="1" />
+    <End Role="ItemDiscount1" Type="Self.ItemDiscount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ItemDiscount">
+        <PropertyRef Name="discountID" />
+      </Principal>
+      <Dependent Role="ItemDiscount1">
+        <PropertyRef Name="discountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemDiscount_ItemMaster">
+    <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+    <End Role="ItemDiscount" Type="Self.ItemDiscount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemMaster">
+        <PropertyRef Name="itemId" />
+      </Principal>
+      <Dependent Role="ItemDiscount">
+        <PropertyRef Name="itemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Order1">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Order1">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Order1">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Order2">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Order1">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Order3">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Order1" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="Order1">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_UserMaster">
+    <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_OrderDetails">
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+    <End Role="OrderDetails1" Type="Self.OrderDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderDetails">
+        <PropertyRef Name="orderDetailsID" />
+      </Principal>
+      <Dependent Role="OrderDetails1">
+        <PropertyRef Name="orderDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_OrderDetails1">
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+    <End Role="OrderDetails1" Type="Self.OrderDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderDetails">
+        <PropertyRef Name="orderDetailsID" />
+      </Principal>
+      <Dependent Role="OrderDetails1">
+        <PropertyRef Name="orderDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_OrderDetails2">
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+    <End Role="OrderDetails1" Type="Self.OrderDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderDetails">
+        <PropertyRef Name="orderDetailsID" />
+      </Principal>
+      <Dependent Role="OrderDetails1">
+        <PropertyRef Name="orderDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_OrderDetails3">
+    <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="1" />
+    <End Role="OrderDetails1" Type="Self.OrderDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderDetails">
+        <PropertyRef Name="orderDetailsID" />
+      </Principal>
+      <Dependent Role="OrderDetails1">
+        <PropertyRef Name="orderDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderPayment_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="OrderPayment">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderPayment_OrderPayment">
+    <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="1" />
+    <End Role="OrderPayment1" Type="Self.OrderPayment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderPayment">
+        <PropertyRef Name="paymentID" />
+      </Principal>
+      <Dependent Role="OrderPayment1">
+        <PropertyRef Name="paymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ebuyAntiquesStoreModelStoreContainer">
+    <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemDiscount" EntityType="Self.ItemDiscount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CategoryM__updat__4F7CD00D" Association="Self.FK__CategoryM__updat__4F7CD00D">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="CategoryMaster" EntitySet="CategoryMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemMaste__categ__6E01572D" Association="Self.FK__ItemMaste__categ__6E01572D">
+      <End Role="CategoryMaster" EntitySet="CategoryMaster" />
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemMaste__updat__5AEE82B9" Association="Self.FK__ItemMaste__updat__5AEE82B9">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ItemPrici__itemI__5DCAEF64" Association="Self.FK__ItemPrici__itemI__5DCAEF64">
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+      <End Role="ItemDiscount" EntitySet="ItemDiscount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemDiscount_ItemDiscount" Association="Self.FK_ItemDiscount_ItemDiscount">
+      <End Role="ItemDiscount" EntitySet="ItemDiscount" />
+      <End Role="ItemDiscount1" EntitySet="ItemDiscount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemDiscount_ItemDiscount1" Association="Self.FK_ItemDiscount_ItemDiscount1">
+      <End Role="ItemDiscount" EntitySet="ItemDiscount" />
+      <End Role="ItemDiscount1" EntitySet="ItemDiscount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemDiscount_ItemMaster" Association="Self.FK_ItemDiscount_ItemMaster">
+      <End Role="ItemMaster" EntitySet="ItemMaster" />
+      <End Role="ItemDiscount" EntitySet="ItemDiscount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Order" Association="Self.FK_Order_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order1" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Order1" Association="Self.FK_Order_Order1">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order1" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Order2" Association="Self.FK_Order_Order2">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order1" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Order3" Association="Self.FK_Order_Order3">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Order1" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_UserMaster" Association="Self.FK_Order_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Order" Association="Self.FK_OrderDetails_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_OrderDetails" Association="Self.FK_OrderDetails_OrderDetails">
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+      <End Role="OrderDetails1" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_OrderDetails1" Association="Self.FK_OrderDetails_OrderDetails1">
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+      <End Role="OrderDetails1" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_OrderDetails2" Association="Self.FK_OrderDetails_OrderDetails2">
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+      <End Role="OrderDetails1" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_OrderDetails3" Association="Self.FK_OrderDetails_OrderDetails3">
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+      <End Role="OrderDetails1" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderPayment_Order" Association="Self.FK_OrderPayment_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderPayment" EntitySet="OrderPayment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderPayment_OrderPayment" Association="Self.FK_OrderPayment_OrderPayment">
+      <End Role="OrderPayment" EntitySet="OrderPayment" />
+      <End Role="OrderPayment1" EntitySet="OrderPayment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
